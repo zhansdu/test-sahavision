@@ -9,6 +9,21 @@ export default [
 	{
 		files: ["**/*.{js,mjs,cjs,ts,vue}"],
 		languageOptions: { globals: globals.browser },
+		rules: {
+			// Your existing rules...
+		},
+		settings: {
+			"import/resolver": {
+				alias: {
+					map: [["@", "./src"]],
+					extensions: [".js", ".ts", ".vue", ".json"], // Recognize these extensions
+				},
+			},
+		},
+	},
+	{
+		files: ["**/*.{js,mjs,cjs,ts,vue}"],
+		languageOptions: { globals: globals.browser },
 		plugins: {
 			tailwindcss: pluginTailwind,
 		},
@@ -25,7 +40,7 @@ export default [
 			"no-multiple-empty-lines": ["error", { max: 1 }],
 			"prefer-const": "error",
 			"space-before-function-paren": ["error", "never"],
-      
+
 			// Spacing rules
 			"space-in-parens": ["error", "never"],
 			"space-infix-ops": "error",
@@ -35,11 +50,11 @@ export default [
 			"array-bracket-spacing": ["error", "never"],
 			"key-spacing": ["error", { mode: "strict" }],
 			"no-multi-spaces": "error",
-      
+
 			// Indentation
 			"indent": ["error", "tab"],
 			"no-tabs": 0,
-      
+
 			// TypeScript-specific rules
 			"@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
 			"@typescript-eslint/explicit-function-return-type": "error",
@@ -48,21 +63,20 @@ export default [
 			"@typescript-eslint/no-inferrable-types": "warn",
 
 			// Tailwind CSS plugin rules
-			"tailwindcss/classnames-order": "warn", 
+			"tailwindcss/classnames-order": "warn",
 			"tailwindcss/no-custom-classname": "off",
-
-			// Tailwind CSS specific at-rules handling
-      "tailwindcss/unknownAtRules": ["error", {
-        "ignoreAtRules": ["tailwind", "layer", "apply", "variants", "screen"]
-      }],
 		},
 	},
-	{ files: ["**/*.{js,mjs,cjs,ts,vue}"] },
-	{ languageOptions: { globals: globals.browser } },
+	// Tailwind CSS-specific at-rules handling
+	{
+		files: ["**/*.vue"],
+		rules: {
+			"tailwindcss/no-custom-classname": "off", // Customize if needed
+		},
+	},
 	pluginJs.configs.recommended,
 	...tseslint.configs.recommended,
 	...pluginVue.configs["flat/essential"],
-	{ files: ["**/*.vue"], languageOptions: { parserOptions: { parser: tseslint.parser } } },
 	{
 		files: ["**/*.vue"],
 		languageOptions: { parserOptions: { parser: tseslint.parser } },
@@ -78,7 +92,7 @@ export default [
 			"vue/no-mutating-props": "off",
 			"vue/no-v-for-template-key": "off",
 			"vue/no-v-model-argument": "off",
-      
+
 			// Additional rules
 			"camelcase": "off",
 
