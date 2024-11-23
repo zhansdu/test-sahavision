@@ -10,7 +10,10 @@
 			Vite + Vue
 		</h1>
 	</div>
-	<button @click="openModal">Open modal</button>
+	<div>
+		Selected folder : {{ selected_folder?.name ?? 'None selected' }}
+	</div>
+	<button class="mt-3" @click="openModal">Open modal</button>
 	<Dialog v-model:visible="visible" modal header="Select folder" :style="{ width: '25rem' }">
 		<ModalComponent />
 	</Dialog>
@@ -18,7 +21,7 @@
 <script setup lang="ts">
 import Dialog from "primevue/dialog";
 import ModalComponent from "./ModalComponent.vue";
-import modal,{ visible } from "../composable/modal";
+import modal,{ visible, selected_folder } from "../composable/modal";
 
 const { openModal } = modal();
 </script>

@@ -1,13 +1,13 @@
 export type folder = {
-  id:number,
-  name:string,
-  children:folder[]
+  id: number,
+  name: string,
+  children: folder[]
 }
 
-export type modal_functions ={
-  openModal:()=>void,
-  closeModal:()=>void,
-  setFolder:(folder:folder)=>void
+export type modal_functions = {
+  openModal: () => void,
+  closeModal: () => void,
+  saveFolder: (folder?: folder) => void
 }
 
 export type TreeNode = {
